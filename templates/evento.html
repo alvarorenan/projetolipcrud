@@ -5,20 +5,21 @@
 
     <div class="registration-form">
     <form action="submit" method="POST"> {% csrf_token %}
+        <input type="number" name="id_evento" value="{{evento.id}}" hidden>
             <div class="form-icon">
                 <span><i class="icon icon-calendar"></i></span>
             </div>
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input required name="nome" type="text" class="form-control item" id="nome" placeholder="Nome do evento">
+                <input value="{{ evento.nome }}" required name="nome" type="text" class="form-control item" id="nome" placeholder="Nome do evento">
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <textarea name="descricao" class="form-control item" id="descricao" placeholder="Descrição do evento"></textarea>
+                <textarea name="descricao" class="form-control item" id="descricao" placeholder="Descrição do evento"> {{ evento.descricao }} </textarea>
             </div>
             <div class="form-group">
                 <label for="data">Data do evento</label>
-                <input required name="data" type="datetime-local" class="form-control item" id="data">
+                <input required value="{{ evento.get_data_input_evento }}" name="data" type="datetime-local" class="form-control item" id="data">
             </div>
             <div class="form-group">
                 <a href="/">
