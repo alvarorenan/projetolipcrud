@@ -1,18 +1,76 @@
 {% extends "model-page.html" %}
 
 {% block content %}
-<h1>Agendamentos</h1>
-    <a href="evento/">
-    <button type="button" class="btn btn-success"> Novo Agendamento</button>
-    </a>
+<style>
+    ul{
+        list-style-type: none;
 
-<ul>
-{% for evento in eventos %}
-    <li>
-        {{ evento.nome }} - {{ evento.get_data_evento }}
-        ( <a href="evento/?id={{ evento.id }}">Editar</a>
-        / <a href="evento/delete/{{ evento.id }}">Excluir</a>)
-    </li>
-{% endfor %}
-</ul>
+    }
+    li{
+        display: inline;
+        padding: 10px;
+    }
+</style>
+<div class="container" style="border: 1px solid black;
+border-radius: 10px;
+padding: 10px;
+margin-top: 10px;
+
+">
+<center><h1><i class="fa fa-address-book" aria-hidden="true"></i>
+ Agendamentos</h1></center>
+
+<script src="https://kit.fontawesome.com/aaf53c6340.js" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+            <a href="evento/">
+                <div style="float: right; margin-top: -10px; margin-bottom: 10px;">
+                    <button class="btn btn-success">Novo Agendamento</button>
+                </div>
+            </a>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Endereço</th>
+                            <th>Horário <i class="fa fa-calendar"></i> </th>
+                            <th>Descrição</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evento in eventos %}
+                        <tr>
+                            <td style={%  if evento.get_evento_atrasado %}
+            "color:red"
+            {% endif %}>{{evento.nome}}</td>
+                            <td>{{evento.telefone}} <a style="color: green"
+                                    href="https://api.whatsapp.com/send?phone={{ evento.get_telefone_whitout_mask }}&text=Ol%C3%A1,%20gostaria%20de%20conversar%20sobre%20o%20evento%20%22{{ evento.nome }}%22%20marcado%20para%20o%20dia%20{{ evento.get_dia }}%20às%20{{ evento.get_hora }}">
+                                <i class="fa fa-whatsapp" aria-hidden="true"></i></a></td>
+                            <td>{{evento.endereco}} <a style="color: red"
+                                    href="https://www.google.com/maps/search/?api=1&query={{ evento.endereco }}">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i></a></td>
+                            <td>{{evento.get_data_evento}}</td>
+                            <td>{{evento.descricao}}</td>
+                            <td>
+                                <a href="evento/?id={{ evento.id }}">
+                                    <button type="button" class="btn btn-outline-primary">Editar</button>
+                                </a>
+                                <a href="evento/delete/{{ evento.id }}">
+                                    <button type="button" class="btn btn-outline-danger">Excluir</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock %}

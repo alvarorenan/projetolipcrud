@@ -14,6 +14,14 @@
                 <input value="{{ evento.nome }}" required name="nome" type="text" class="form-control item" id="nome" placeholder="Nome do evento">
             </div>
             <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input value="{{ evento.telefone }}" required name="telefone" type="text" class="form-control item" id="telefone" placeholder="(55) 55555-5555">
+            </div>
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input value="{{ evento.endereco }}" required name="endereco" type="text" class="form-control item" id="endereco" placeholder="Endereço">
+            </div>
+            <div class="form-group">
                 <label for="descricao">Descrição</label>
                 <textarea name="descricao" class="form-control item" id="descricao" placeholder="Descrição do evento"> {{ evento.descricao }} </textarea>
             </div>
@@ -29,6 +37,13 @@
             </div>
         </form>
     </div>
-
+<script>
+    document.getElementById("telefone").addEventListener('input', function (e) {
+        var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+</script>
 {% endblock %}
+
+
 
