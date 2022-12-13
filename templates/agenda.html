@@ -47,10 +47,10 @@ margin-top: 10px;
                             <td style={%  if evento.get_evento_atrasado %}
             "color:red"
             {% endif %}>{{evento.nome}}</td>
-                            <td>{{evento.telefone}} <a style="color: green"
+                            <td>{{evento.telefone}} <a target="_blank" style="color: green"
                                     href="https://api.whatsapp.com/send?phone={{ evento.get_telefone_whitout_mask }}&text=Ol%C3%A1,%20gostaria%20de%20conversar%20sobre%20o%20evento%20%22{{ evento.nome }}%22%20marcado%20para%20o%20dia%20{{ evento.get_dia }}%20às%20{{ evento.get_hora }}">
                                 <i class="fa fa-whatsapp" aria-hidden="true"></i></a></td>
-                            <td>{{evento.endereco}} <a style="color: red"
+                            <td>{{evento.endereco}} <a target="_blank" style="color: red"
                                     href="https://www.google.com/maps/search/?api=1&query={{ evento.endereco }}">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i></a></td>
                             <td>{{evento.get_data_evento}}</td>
